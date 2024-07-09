@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/soap-service"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://example.com/soap-service">
+
+    <message name="ProdCreateUserDefinitionRequest">
+        <part name="name" type="xsd:string"/>
+        <part name="level" type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+        <part name="shift" type="xsd:string"/>
+        <part name="registration" type="xsd:string"/>
+        <part name="status" type="xsd:string"/>
+    </message>
+
+    <message name="ProdCreateUserDefinitionResponse">
+        <part name="response" type="xsd:string"/>
+    </message>
+
+    <portType name="SoapPortType">
+        <operation name="ProdCreateUserDefinition">
+            <input message="tns:ProdCreateUserDefinitionRequest"/>
+            <output message="tns:ProdCreateUserDefinitionResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="ProdCreateUserDefinitionSoapBinding" type="tns:SoapPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="ProdCreateUserDefinition">
+            <soap:operation soapAction="http://example.com/soap-service#ProdCreateUserDefinition"/>
+            <input>
+                <soap:body use="literal" namespace="http://example.com/soap-service"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://example.com/soap-service"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ProdCreateUserService">
+        <port name="SoapPort" binding="tns:ProdCreateUserDefinitionSoapBinding">
+            <soap:address location="http://10.1.76.54:84/integration/ProdCreateUser/webservice.php"/>
+        </port>
+    </service>
+
+</definitions>

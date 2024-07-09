@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/soap-service"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://example.com/soap-service">
+
+    <message name="ProdGetUserByRegistrationIDDefinitionRequest">
+        <part name="registration" type="xsd:int"/>
+    </message>
+
+    <message name="ProdGetUserByRegistrationIDDefinitionResponse">
+        <part name="response" type="xsd:string"/>
+    </message>
+
+    <portType name="SoapPortType">
+        <operation name="ProdGetUserByRegistrationIDDefinition">
+            <input message="tns:ProdGetUserByRegistrationIDDefinitionRequest"/>
+            <output message="tns:ProdGetUserByRegistrationIDDefinitionResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="ProdGetUserByRegistrationIDDefinitionSoapBinding" type="tns:SoapPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="ProdGetUserByRegistrationIDDefinition">
+            <soap:operation soapAction="http://example.com/soap-service#ProdGetUserByRegistrationIDDefinition"/>
+            <input>
+                <soap:body use="literal" namespace="http://example.com/soap-service"/>
+            </input>
+            <output>
+                <soap:body use="literal" namespace="http://example.com/soap-service"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ProdGetUserByRegistrationIDDefinitionSoapService">
+        <port name="SoapPort" binding="tns:ProdGetUserByRegistrationIDDefinitionSoapBinding">
+            <soap:address location="http://10.1.76.54:84/integration/ProdGetUserByRegistrationID/webservice.php"/>
+        </port>
+    </service>
+
+</definitions>

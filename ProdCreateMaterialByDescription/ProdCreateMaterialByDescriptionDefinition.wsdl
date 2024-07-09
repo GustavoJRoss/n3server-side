@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/soap-service"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://example.com/soap-service">
+
+    <message name="ProdCreateMaterialByDescriptionDefinitionRequest">
+        <part name="MaterialName" type="xsd:string"/>
+        <part name="MaterialInternalID" type="xsd:string"/>
+        <part name="Location" type="xsd:string"/>
+        <part name="Quantity" type="xsd:string"/>
+    </message>
+
+    <message name="ProdCreateMaterialByDescriptionDefinitionResponse">
+        <part name="response" type="xsd:string"/>
+    </message>
+
+    <portType name="SoapPortType">
+        <operation name="ProdCreateMaterialByDescriptionDefinition">
+            <input message="tns:ProdCreateMaterialByDescriptionDefinitionRequest"/>
+            <output message="tns:ProdCreateMaterialByDescriptionDefinitionResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="ProdCreateMaterialByDescriptionDefinitionSoapBinding" type="tns:SoapPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="ProdCreateMaterialByDescriptionDefinition">
+            <soap:operation soapAction="http://example.com/soap-service#ProdCreateMaterialByDescriptionDefinition"/>
+            <input>
+                <soap:body use="encoded" namespace="http://example.com/soap-service" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </input>
+            <output>
+                <soap:body use="encoded" namespace="http://example.com/soap-service" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="ProdCreateMaterialByDescriptionDefinition">
+        <port name="SoapPort" binding="tns:ProdCreateMaterialByDescriptionDefinitionSoapBinding">
+            <soap:address location="http://10.1.76.54:84/integration/ProdCreateMaterialByDescription/webservice.php"/>
+        </port>
+    </service>
+
+</definitions>
